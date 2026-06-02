@@ -1,5 +1,6 @@
 import { db } from "@/database";
 
+import { getPresetPrice } from "@/modules/milk-book/services/milkRatePresetService";
 import { DailyRecord } from "../types";
 
 export function getDailyRecords(
@@ -28,16 +29,11 @@ export function createEmptyDailyRecord(milkBookId: number, date: string) {
   db.runSync(
     `
       INSERT OR IGNORE INTO daily_records (
-  milk_book_id,
-  date,
+        milk_book_id,
+        date
+      )
 
-  morning_cow_price,
-  morning_buffalo_price,
-
-  night_cow_price,
-  night_buffalo_price
-)
-VALUES (?, ?, 70, 80, 70, 80);
+      VALUES (?, ?);
     `,
     [milkBookId, date],
   );
@@ -72,54 +68,71 @@ export function getDailyRecordByDate(milkBookId: number, date: string) {
 }
 
 export function calculateTotalAmount(record: {
-  morning_cow_qty: number;
-  morning_buffalo_qty: number;
+  morning_cow_amount: number;
 
-  night_cow_qty: number;
-  night_buffalo_qty: number;
+  morning_buffalo_amount: number;
 
-  morning_cow_price: number;
-  morning_buffalo_price: number;
+  night_cow_amount: number;
 
-  night_cow_price: number;
-  night_buffalo_price: number;
+  night_buffalo_amount: number;
 }) {
   return (
-    record.morning_cow_qty * record.morning_cow_price +
-    record.morning_buffalo_qty * record.morning_buffalo_price +
-    record.night_cow_qty * record.night_cow_price +
-    record.night_buffalo_qty * record.night_buffalo_price
+    record.morning_cow_amount +
+    record.morning_buffalo_amount +
+    record.night_cow_amount +
+    record.night_buffalo_amount
   );
 }
 
-export function updateQuantityField(id: number, field: string, value: number) {
-  db.runSync(
-    `
-      UPDATE daily_records
-      SET
-        ${field} = ?,
-        updated_at = CURRENT_TIMESTAMP
-      WHERE id = ?;
-    `,
-    [value, id],
-  );
+export function updateQuantityField(
+  milkBookId: number,
+  recordId: number,
+  field: string,
+  milkType: "cow" | "buffalo",
+  quantity: number,
+) {
+  const preset = getPresetPrice(milkBookId, milkType, quantity);
+
+  const amount = preset?.price || 0;
+
+  const amountField = field.replace("_qty", "_amount");
 
   db.runSync(
     `
       UPDATE daily_records
+
+      SET
+        ${field} = ?,
+        ${amountField} = ?,
+        updated_at = CURRENT_TIMESTAMP
+
+      WHERE id = ?;
+    `,
+    [quantity, amount, recordId],
+  );
+
+  recalculateTotal(recordId);
+}
+
+export function recalculateTotal(recordId: number) {
+  db.runSync(
+    `
+      UPDATE daily_records
+
       SET
         total_amount =
           (
-            (morning_cow_qty * morning_cow_price)
+            morning_cow_amount
             +
-            (morning_buffalo_qty * morning_buffalo_price)
+            morning_buffalo_amount
             +
-            (night_cow_qty * night_cow_price)
+            night_cow_amount
             +
-            (night_buffalo_qty * night_buffalo_price)
+            night_buffalo_amount
           )
+
       WHERE id = ?;
     `,
-    [id],
+    [recordId],
   );
 }

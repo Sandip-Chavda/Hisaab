@@ -19,7 +19,6 @@ import { Button } from "@/shared/ui/Button";
 import { Screen } from "@/shared/ui/Screen";
 import { Text } from "@/shared/ui/Text";
 
-import { MonthlySummaryCard } from "@/modules/billing/components/MonthlySummaryCard";
 import { getMonthlySummary } from "@/modules/billing/services/billingService";
 import { MonthlySummary } from "@/modules/billing/types";
 import { formatMonthLabel, getCurrentMonth, getTodayDate } from "@/utils/date";
@@ -136,7 +135,7 @@ export default function MilkBookDetailsScreen() {
           <Button title="Add Today Record" onPress={handleCreateTodayRecord} />
         </View>
 
-        {summary && <MonthlySummaryCard summary={summary} />}
+        {/* {summary && <MonthlySummaryCard summary={summary} />} */}
 
         <FlatList
           className="flex-1"
@@ -158,6 +157,7 @@ export default function MilkBookDetailsScreen() {
           }
           renderItem={({ item }) => (
             <DailyRecordCard
+              milkBookId={milkBook.id}
               record={item}
               onRefresh={() => loadRecords(milkBook.id)}
             />

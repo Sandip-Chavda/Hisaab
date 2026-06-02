@@ -1,33 +1,53 @@
 import { View } from "react-native";
 
-import { EditableQuantityCell } from "./EditableQuantityCell";
-
 import { DailyRecord } from "../types";
-
-import { updateQuantityField } from "../services/dailyRecordService";
 
 import { Text } from "@/shared/ui/Text";
 
+import { getMilkRatePresets } from "@/modules/milk-book/services/milkRatePresetService";
 import { formatDisplayDate, getTodayDate } from "@/utils/date";
+import { useState } from "react";
+import { updateQuantityField } from "../services/dailyRecordService";
+import { QuantitySelectionModal } from "./QuantitySelectionModal";
+import { QuantitySelectorButton } from "./QuantitySelectorButton";
 
 type Props = {
   record: DailyRecord;
-
   onRefresh: () => void;
+  milkBookId: number;
 };
 
-export function DailyRecordCard({ record, onRefresh }: Props) {
+export function DailyRecordCard({ record, onRefresh, milkBookId }: Props) {
+  const [selectedField, setSelectedField] = useState<
+    | "morning_cow_qty"
+    | "morning_buffalo_qty"
+    | "night_cow_qty"
+    | "night_buffalo_qty"
+    | null
+  >(null);
+
   const isToday = record.date === getTodayDate();
 
+  const cowPresets = getMilkRatePresets(milkBookId).filter(
+    (item) => item.milk_type === "cow",
+  );
+
+  const buffaloPresets = getMilkRatePresets(milkBookId).filter(
+    (item) => item.milk_type === "buffalo",
+  );
+
+  const activePresets = selectedField?.includes("buffalo")
+    ? buffaloPresets
+    : cowPresets;
   return (
     <View
-      className={`rounded-2xl border p-4 ${
+      className={`rounded-3xl border p-5 ${
         isToday ? "border-red-200 bg-red-50" : "border-gray-200 bg-white"
       }`}
     >
       <View className="flex-row items-start justify-between">
         <View>
-          <Text className="font-semibold">
+          <Text className="text-lg font-bold">
             {formatDisplayDate(record.date)}
           </Text>
 
@@ -36,71 +56,130 @@ export function DailyRecordCard({ record, onRefresh }: Props) {
               <Text className="text-xs font-medium text-red-600">Today</Text>
             </View>
           )}
+        </View>
+
+        <View className="items-end">
+          <Text className="text-lg font-bold text-red-600">
+            ₹ {record.total_amount}
+          </Text>
 
           <Text className="mt-1 text-sm text-gray-500">
-            Total:{" "}
             {(
-              record.morning_cow_qty +
-              record.morning_buffalo_qty +
-              record.night_cow_qty +
-              record.night_buffalo_qty
+              (record.morning_cow_qty || 0) +
+              (record.morning_buffalo_qty || 0) +
+              (record.night_cow_qty || 0) +
+              (record.night_buffalo_qty || 0)
             ).toFixed(1)}
             L
           </Text>
         </View>
-
-        <Text className="font-bold text-red-600">₹ {record.total_amount}</Text>
       </View>
 
-      <View className="mt-5">
-        <View className="flex-row justify-between">
-          <Text className="w-16 text-xs text-gray-500">MC</Text>
+      <View className="mt-4">
+        {/* Morning */}
+        <View>
+          <Text className="text-center text-sm font-semibold text-gray-600">
+            Morning
+          </Text>
 
-          <Text className="w-16 text-xs text-gray-500">MB</Text>
+          <View className="mt-3 gap-3">
+            {/* Cow */}
+            <View>
+              <Text className="mb-2 text-lg text-gray-600 font-semibold">
+                Cow
+              </Text>
 
-          <Text className="w-16 text-xs text-gray-500">NC</Text>
+              <QuantitySelectorButton
+                value={record.morning_cow_qty}
+                onPress={() => {
+                  setSelectedField("morning_cow_qty");
+                }}
+              />
+            </View>
 
-          <Text className="w-16 text-xs text-gray-500">NB</Text>
+            {/* Buffalo */}
+            <View>
+              <Text className="mb-2 text-lg text-gray-600 font-semibold">
+                Buffalo
+              </Text>
+
+              <QuantitySelectorButton
+                value={record.morning_buffalo_qty}
+                onPress={() => {
+                  setSelectedField("morning_buffalo_qty");
+                }}
+              />
+            </View>
+          </View>
         </View>
 
-        <View className="mt-2 flex-row justify-between">
-          <EditableQuantityCell
-            value={record.morning_cow_qty}
-            onChange={(value) => {
-              updateQuantityField(record.id, "morning_cow_qty", value);
+        {/* Divider */}
+        <View className="my-4 items-center">
+          <View className="h-1 w-24 rounded-full bg-gray-300" />
+        </View>
 
-              onRefresh();
-            }}
-          />
+        {/* Night */}
+        <View>
+          <Text className="text-center text-sm font-semibold text-gray-600">
+            Night
+          </Text>
 
-          <EditableQuantityCell
-            value={record.morning_buffalo_qty}
-            onChange={(value) => {
-              updateQuantityField(record.id, "morning_buffalo_qty", value);
+          <View className="mt-3 gap-3">
+            {/* Cow */}
+            <View>
+              <Text className="mb-2 text-lg text-gray-600 font-semibold">
+                Cow
+              </Text>
 
-              onRefresh();
-            }}
-          />
+              <QuantitySelectorButton
+                value={record.night_cow_qty}
+                onPress={() => {
+                  setSelectedField("night_cow_qty");
+                }}
+              />
+            </View>
 
-          <EditableQuantityCell
-            value={record.night_cow_qty}
-            onChange={(value) => {
-              updateQuantityField(record.id, "night_cow_qty", value);
+            {/* Buffalo */}
+            <View>
+              <Text className="mb-2 text-lg text-gray-600 font-semibold">
+                Buffalo
+              </Text>
 
-              onRefresh();
-            }}
-          />
-
-          <EditableQuantityCell
-            value={record.night_buffalo_qty}
-            onChange={(value) => {
-              updateQuantityField(record.id, "night_buffalo_qty", value);
-
-              onRefresh();
-            }}
-          />
+              <QuantitySelectorButton
+                value={record.night_buffalo_qty}
+                onPress={() => {
+                  setSelectedField("night_buffalo_qty");
+                }}
+              />
+            </View>
+          </View>
         </View>
       </View>
+
+      <QuantitySelectionModal
+        visible={!!selectedField}
+        presets={activePresets}
+        onClose={() => {
+          setSelectedField(null);
+        }}
+        onSelect={(quantity) => {
+          if (!selectedField) return;
+
+          const milkType = selectedField.includes("buffalo")
+            ? "buffalo"
+            : "cow";
+
+          updateQuantityField(
+            milkBookId,
+            record.id,
+            selectedField,
+            milkType,
+            quantity,
+          );
+
+          onRefresh();
+        }}
+      />
     </View>
   );
 }

@@ -5,17 +5,17 @@ export type DailyRecord = {
 
   date: string;
 
-  morning_cow_qty: number;
-  morning_buffalo_qty: number;
+  morning_cow_qty: number | null;
+  morning_buffalo_qty: number | null;
 
-  night_cow_qty: number;
-  night_buffalo_qty: number;
+  night_cow_qty: number | null;
+  night_buffalo_qty: number | null;
 
-  morning_cow_price: number;
-  morning_buffalo_price: number;
+  morning_cow_amount: number;
+  morning_buffalo_amount: number;
 
-  night_cow_price: number;
-  night_buffalo_price: number;
+  night_cow_amount: number;
+  night_buffalo_amount: number;
 
   total_amount: number;
 
