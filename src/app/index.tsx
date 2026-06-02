@@ -1,11 +1,14 @@
-import { Text, View } from "react-native";
+import { Screen } from "@/shared/ui/Screen";
+import { Text } from "@/shared/ui/Text";
 
-export default function Index() {
+export default function HomeScreen() {
   return (
-    <View className="flex-1 items-center justify-center bg-white">
-      <Text className="text-xl font-bold text-blue-500">
-        Welcome to Hisaab!
+    <Screen>
+      <Text className="text-3xl font-bold text-red-600">Hishaab</Text>
+
+      <Text className="mt-2 text-base text-gray-500">
+        Personal Milk Billing Tracker
       </Text>
-    </View>
+    </Screen>
   );
 }
