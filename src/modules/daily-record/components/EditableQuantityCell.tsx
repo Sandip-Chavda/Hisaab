@@ -1,28 +1,26 @@
 import { useEffect, useState } from "react";
 import { TextInput, View } from "react-native";
 
-import { Text } from "@/shared/ui/Text";
+import { styled } from "nativewind";
+
+const StyledTextInput = styled(TextInput);
 
 type Props = {
-  label: string;
-
   value: number;
 
   onChange: (value: number) => void;
 };
 
-export function EditableQuantityCell({ label, value, onChange }: Props) {
-  const [inputValue, setInputValue] = useState(String(value || ""));
+export function EditableQuantityCell({ value, onChange }: Props) {
+  const [inputValue, setInputValue] = useState(value ? String(value) : "");
 
   useEffect(() => {
     setInputValue(value ? String(value) : "");
   }, [value]);
 
   return (
-    <View className="mt-2">
-      <Text className="text-sm text-gray-500">{label}</Text>
-
-      <TextInput
+    <View className="w-16">
+      <StyledTextInput
         keyboardType="decimal-pad"
         value={inputValue}
         onChangeText={(text) => {
@@ -33,7 +31,7 @@ export function EditableQuantityCell({ label, value, onChange }: Props) {
           onChange(parsed);
         }}
         placeholder="0"
-        className="mt-1 rounded-xl border border-gray-200 px-3 py-2"
+        className="rounded-xl border border-gray-200 bg-gray-50 px-2 py-2 text-center text-base"
       />
     </View>
   );

@@ -1,3 +1,3 @@
-import * as SQLite from "expo-sqlite";
+import { openDatabaseSync } from "expo-sqlite";
 
-export const db = SQLite.openDatabaseSync("hishaab.db");
+export const db = openDatabaseSync("hishaab.db");

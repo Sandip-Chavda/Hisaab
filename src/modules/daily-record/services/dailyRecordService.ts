@@ -2,15 +2,25 @@ import { db } from "@/database";
 
 import { DailyRecord } from "../types";
 
-export function getDailyRecords(milkBookId: number) {
+export function getDailyRecords(
+  milkBookId: number,
+  month: number,
+  year: number,
+) {
+  const formattedMonth = String(month).padStart(2, "0");
+
   return db.getAllSync<DailyRecord>(
     `
       SELECT *
       FROM daily_records
+
       WHERE milk_book_id = ?
+      AND strftime('%m', date) = ?
+      AND strftime('%Y', date) = ?
+
       ORDER BY date DESC;
     `,
-    [milkBookId],
+    [milkBookId, formattedMonth, String(year)],
   );
 }
 
@@ -82,25 +92,34 @@ export function calculateTotalAmount(record: {
   );
 }
 
-export function updateMorningCowQty(id: number, qty: number) {
+export function updateQuantityField(id: number, field: string, value: number) {
   db.runSync(
     `
       UPDATE daily_records
       SET
-        morning_cow_qty = ?,
+        ${field} = ?,
+        updated_at = CURRENT_TIMESTAMP
+      WHERE id = ?;
+    `,
+    [value, id],
+  );
+
+  db.runSync(
+    `
+      UPDATE daily_records
+      SET
         total_amount =
           (
-            (? * morning_cow_price)
+            (morning_cow_qty * morning_cow_price)
             +
             (morning_buffalo_qty * morning_buffalo_price)
             +
             (night_cow_qty * night_cow_price)
             +
             (night_buffalo_qty * night_buffalo_price)
-          ),
-        updated_at = CURRENT_TIMESTAMP
+          )
       WHERE id = ?;
     `,
-    [qty, qty, id],
+    [id],
   );
 }
