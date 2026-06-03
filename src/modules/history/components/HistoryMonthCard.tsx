@@ -1,7 +1,10 @@
-import { Pressable, View } from "react-native";
+import { Alert, Pressable, View } from "react-native";
 
 import { router } from "expo-router";
 
+import { getDailyRecords } from "@/modules/daily-record/services/dailyRecordService";
+import { downloadInvoicePdf } from "@/modules/invoice/services/pdfInvoiceService";
+import { getOrCreateCurrentMilkBook } from "@/modules/milk-book/services/currentMilkBookService";
 import { Text } from "@/shared/ui/Text";
 
 type Props = {
@@ -37,22 +40,59 @@ export function HistoryMonthCard({ month, year, totalAmount }: Props) {
   const isCurrentMonth =
     Number(month) === currentMonth && Number(year) === currentYear;
 
-  return (
-    <Pressable
-      onPress={() => {
-        router.push({
-          pathname: "/history-month",
+  function openMonth() {
+    router.push({
+      pathname: "/history-month",
 
-          params: {
-            month,
-            year,
+      params: {
+        month,
+        year,
+      },
+    });
+  }
+
+  async function handleInvoice() {
+    const milkBook = getOrCreateCurrentMilkBook();
+
+    if (!milkBook) {
+      return;
+    }
+
+    const records = getDailyRecords(milkBook.id, month, year);
+
+    Alert.alert(
+      "Invoice",
+      `${MONTH_NAMES[month - 1]} ${year}`,
+
+      [
+        {
+          text: "Share Invoice",
+
+          onPress: async () => {
+            await downloadInvoicePdf(
+              MONTH_NAMES[month - 1],
+              String(year),
+              records,
+            );
           },
-        });
-      }}
+        },
+
+        {
+          text: "Close",
+
+          style: "cancel",
+        },
+      ],
+    );
+  }
+
+  return (
+    <View
       className={`rounded-3xl border p-5 ${
         isCurrentMonth ? "border-red-200 bg-red-50" : "border-gray-200 bg-white"
       }`}
     >
+      {/* Top */}
       <View className="flex-row items-center justify-between">
         <View>
           <Text className="text-2xl font-bold">
@@ -78,6 +118,29 @@ export function HistoryMonthCard({ month, year, totalAmount }: Props) {
           </Text>
         </View>
       </View>
-    </Pressable>
+
+      {/* Actions */}
+      <View className="mt-5 flex-row gap-3">
+        {/* Open */}
+        <Pressable
+          onPress={openMonth}
+          className="flex-1 rounded-2xl bg-black px-4 py-3"
+        >
+          <Text className="text-center font-semibold text-white">Open</Text>
+        </Pressable>
+
+        {/* Invoice */}
+        {!isCurrentMonth && (
+          <Pressable
+            onPress={handleInvoice}
+            className="flex-1 rounded-2xl bg-red-500 px-4 py-3"
+          >
+            <Text className="text-center font-semibold text-white">
+              Invoice
+            </Text>
+          </Pressable>
+        )}
+      </View>
+    </View>
   );
 }

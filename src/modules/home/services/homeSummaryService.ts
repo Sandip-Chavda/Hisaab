@@ -1,6 +1,12 @@
 import { db } from "@/database";
 
 export function getMonthlySummary(milkBookId: number) {
+  const now = new Date();
+
+  const month = String(now.getMonth() + 1).padStart(2, "0");
+
+  const year = String(now.getFullYear());
+
   const result = db.getFirstSync<{
     totalAmount: number;
 
@@ -10,6 +16,7 @@ export function getMonthlySummary(milkBookId: number) {
   }>(
     `
         SELECT
+
           COALESCE(
             SUM(total_amount),
             0
@@ -47,9 +54,19 @@ export function getMonthlySummary(milkBookId: number) {
 
         FROM daily_records
 
-        WHERE milk_book_id = ?;
+        WHERE milk_book_id = ?
+
+        AND strftime(
+          '%m',
+          date
+        ) = ?
+
+        AND strftime(
+          '%Y',
+          date
+        ) = ?;
       `,
-    [milkBookId],
+    [milkBookId, month, year],
   );
 
   return {

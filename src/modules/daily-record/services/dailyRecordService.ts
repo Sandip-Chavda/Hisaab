@@ -173,3 +173,75 @@ export function getDailyRecordById(id: number) {
     [id],
   );
 }
+
+// --------------------------------- helper
+
+export function seedLastMonthDummyData(milkBookId: number) {
+  const now = new Date();
+
+  // Last month
+  const lastMonthDate = new Date(now.getFullYear(), now.getMonth() - 1, 1);
+
+  const year = lastMonthDate.getFullYear();
+
+  const month = lastMonthDate.getMonth();
+
+  // Total days in last month
+  const totalDays = new Date(year, month + 1, 0).getDate();
+
+  for (let day = 1; day <= totalDays; day++) {
+    const formattedDate = `${year}-${String(month + 1).padStart(
+      2,
+      "0",
+    )}-${String(day).padStart(2, "0")}`;
+
+    // Create record
+    createEmptyDailyRecord(milkBookId, formattedDate);
+
+    const record = getDailyRecordByDate(milkBookId, formattedDate);
+
+    if (!record) {
+      continue;
+    }
+
+    // Random realistic quantities
+    const quantities = [0, 0.5, 1, 1.5, 2];
+
+    const randomQty = () =>
+      quantities[Math.floor(Math.random() * quantities.length)];
+
+    updateQuantityField(
+      milkBookId,
+      record.id,
+      "morning_cow_qty",
+      "cow",
+      randomQty(),
+    );
+
+    updateQuantityField(
+      milkBookId,
+      record.id,
+      "morning_buffalo_qty",
+      "buffalo",
+      randomQty(),
+    );
+
+    updateQuantityField(
+      milkBookId,
+      record.id,
+      "night_cow_qty",
+      "cow",
+      randomQty(),
+    );
+
+    updateQuantityField(
+      milkBookId,
+      record.id,
+      "night_buffalo_qty",
+      "buffalo",
+      randomQty(),
+    );
+  }
+
+  console.log("Last month dummy data seeded");
+}
