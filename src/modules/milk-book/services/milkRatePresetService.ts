@@ -162,7 +162,7 @@ export function createMilkRatePreset(
       [price, existing.id],
     );
 
-    return;
+    return "updated";
   }
 
   // Create new preset
@@ -179,6 +179,8 @@ export function createMilkRatePreset(
     `,
     [milkBookId, milkType, quantity, price],
   );
+
+  return "created";
 }
 
 export function deleteMilkRatePreset(id: number) {

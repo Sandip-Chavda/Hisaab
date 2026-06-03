@@ -16,6 +16,7 @@ import {
 import { getOrCreateCurrentMilkBook } from "@/modules/milk-book/services/currentMilkBookService";
 
 import { getQuantityLabel } from "@/utils/quantity";
+import Toast from "react-native-toast-message";
 
 export default function SettingsScreen() {
   const milkBook = getOrCreateCurrentMilkBook();
@@ -76,6 +77,13 @@ export default function SettingsScreen() {
                     <Pressable
                       onPress={() => {
                         deleteMilkRatePreset(item.id);
+                        Toast.show({
+                          type: "success",
+
+                          text1: "Preset Deleted",
+
+                          text2: "Milk rate removed",
+                        });
 
                         setRefreshKey((prev) => prev + 1);
                       }}
@@ -126,6 +134,13 @@ export default function SettingsScreen() {
                     <Pressable
                       onPress={() => {
                         deleteMilkRatePreset(item.id);
+                        Toast.show({
+                          type: "success",
+
+                          text1: "Preset Deleted",
+
+                          text2: "Milk rate removed",
+                        });
 
                         setRefreshKey((prev) => prev + 1);
                       }}
@@ -148,7 +163,23 @@ export default function SettingsScreen() {
           milkType="cow"
           onClose={() => setShowCowModal(false)}
           onSave={(quantity, price) => {
-            createMilkRatePreset(milkBookId, "cow", quantity, price);
+            const result = createMilkRatePreset(
+              milkBookId,
+              "cow",
+              quantity,
+              price,
+            );
+
+            Toast.show({
+              type: "success",
+
+              text1: result === "updated" ? "Preset Updated" : "Preset Added",
+
+              text2:
+                result === "updated"
+                  ? "Existing price changed"
+                  : "New milk rate saved",
+            });
 
             setRefreshKey((prev) => prev + 1);
           }}
@@ -160,7 +191,23 @@ export default function SettingsScreen() {
           milkType="buffalo"
           onClose={() => setShowBuffaloModal(false)}
           onSave={(quantity, price) => {
-            createMilkRatePreset(milkBookId, "buffalo", quantity, price);
+            const result = createMilkRatePreset(
+              milkBookId,
+              "buffalo",
+              quantity,
+              price,
+            );
+
+            Toast.show({
+              type: "success",
+
+              text1: result === "updated" ? "Preset Updated" : "Preset Added",
+
+              text2:
+                result === "updated"
+                  ? "Existing price changed"
+                  : "New milk rate saved",
+            });
 
             setRefreshKey((prev) => prev + 1);
           }}
