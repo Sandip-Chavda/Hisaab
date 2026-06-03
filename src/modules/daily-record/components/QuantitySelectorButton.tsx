@@ -15,9 +15,7 @@ export function QuantitySelectorButton({ value, onPress }: Props) {
       className="h-12 flex-row items-center justify-between rounded-xl border border-gray-300 bg-white px-4"
     >
       <Text numberOfLines={1} className="flex-1 text-lg font-semibold">
-        {value === null
-          ? "Select quantity"
-          : `${value}L — ${getQuantityLabel(value)}`}
+        {value === null ? "Select quantity" : getQuantityLabel(value)}
       </Text>
 
       <Text className="text-lg text-gray-500">▼</Text>

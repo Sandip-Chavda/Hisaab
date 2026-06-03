@@ -22,7 +22,7 @@ function formatQuantity(value: number | null) {
     return "રજા";
   }
 
-  return `${value}L — ${getQuantityLabel(value)}`;
+  return getQuantityLabel(value);
 }
 
 export function HistoryRecordCard({ record }: Props) {

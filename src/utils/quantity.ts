@@ -1,23 +1,51 @@
-export function getQuantityLabel(quantity: number) {
-  switch (quantity) {
-    case 0:
-      return "રજા";
-    case 0.5:
-      return "અડધો શેર";
+export const QUANTITY_OPTIONS = [
+  {
+    value: 0,
+    label: "રાજા",
+  },
 
-    case 0.75:
-      return "પોણો શેર";
+  {
+    value: 0.5,
+    label: "0.5L — અડધો શેર / લિટર",
+  },
 
-    case 1:
-      return "શેર";
+  {
+    value: 0.75,
+    label: "0.75L — પોણો શેર",
+  },
 
-    case 1.5:
-      return "દોઢ શેર";
+  {
+    value: 1,
+    label: "1L — એક શેર / લિટર",
+  },
 
-    case 2:
-      return "બે શેર";
+  {
+    value: 1.5,
+    label: "1.5L — દોઢ શેર",
+  },
 
-    default:
-      return "";
+  {
+    value: 2,
+    label: "2L — બે શેર / લિટર",
+  },
+
+  {
+    value: 2.5,
+    label: "2.5L — અઢી શેર / લિટર",
+  },
+
+  {
+    value: 3,
+    label: "3L — ત્રણ શેર / લિટર",
+  },
+];
+
+export function getQuantityLabel(quantity: number | null) {
+  if (quantity === null || quantity === undefined) {
+    return "Select quantity";
   }
+
+  const option = QUANTITY_OPTIONS.find((item) => item.value === quantity);
+
+  return option?.label ?? `${quantity}L`;
 }

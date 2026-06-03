@@ -77,6 +77,7 @@ export default function HomeScreen() {
         {record && (
           <View className="mb-16 mt-6">
             <DailyRecordCard
+              key={summary.totalAmount}
               milkBookId={milkBookId}
               record={record}
               onRefresh={() => {
