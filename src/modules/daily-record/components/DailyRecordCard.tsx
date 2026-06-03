@@ -26,19 +26,10 @@ export function DailyRecordCard({ record, onRefresh, milkBookId }: Props) {
     | null
   >(null);
 
+  const [activePresets, setActivePresets] = useState<any[]>([]);
+
   const isToday = record.date === getTodayDate();
 
-  const cowPresets = getMilkRatePresets(milkBookId).filter(
-    (item) => item.milk_type === "cow",
-  );
-
-  const buffaloPresets = getMilkRatePresets(milkBookId).filter(
-    (item) => item.milk_type === "buffalo",
-  );
-
-  const activePresets = selectedField?.includes("buffalo")
-    ? buffaloPresets
-    : cowPresets;
   return (
     <View
       className={`rounded-3xl border p-5 ${
@@ -92,6 +83,8 @@ export function DailyRecordCard({ record, onRefresh, milkBookId }: Props) {
               <QuantitySelectorButton
                 value={record.morning_cow_qty}
                 onPress={() => {
+                  setActivePresets(getMilkRatePresets(milkBookId, "cow"));
+
                   setSelectedField("morning_cow_qty");
                 }}
               />
@@ -106,6 +99,8 @@ export function DailyRecordCard({ record, onRefresh, milkBookId }: Props) {
               <QuantitySelectorButton
                 value={record.morning_buffalo_qty}
                 onPress={() => {
+                  setActivePresets(getMilkRatePresets(milkBookId, "buffalo"));
+
                   setSelectedField("morning_buffalo_qty");
                 }}
               />
@@ -134,6 +129,8 @@ export function DailyRecordCard({ record, onRefresh, milkBookId }: Props) {
               <QuantitySelectorButton
                 value={record.night_cow_qty}
                 onPress={() => {
+                  setActivePresets(getMilkRatePresets(milkBookId, "cow"));
+
                   setSelectedField("night_cow_qty");
                 }}
               />
@@ -148,6 +145,8 @@ export function DailyRecordCard({ record, onRefresh, milkBookId }: Props) {
               <QuantitySelectorButton
                 value={record.night_buffalo_qty}
                 onPress={() => {
+                  setActivePresets(getMilkRatePresets(milkBookId, "buffalo"));
+
                   setSelectedField("night_buffalo_qty");
                 }}
               />

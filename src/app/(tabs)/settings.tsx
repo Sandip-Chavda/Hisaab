@@ -9,6 +9,7 @@ import { AddPresetModal } from "@/modules/milk-book/components/AddPresetModal";
 
 import {
   createMilkRatePreset,
+  deleteMilkRatePreset,
   getMilkRatePresets,
 } from "@/modules/milk-book/services/milkRatePresetService";
 
@@ -21,6 +22,8 @@ export default function SettingsScreen() {
 
   const milkBookId = milkBook?.id ?? 1;
 
+  const [refreshKey, setRefreshKey] = useState(0);
+
   const [showCowModal, setShowCowModal] = useState(false);
 
   const [showBuffaloModal, setShowBuffaloModal] = useState(false);
@@ -31,7 +34,7 @@ export default function SettingsScreen() {
 
   return (
     <Screen>
-      <ScrollView showsVerticalScrollIndicator={false}>
+      <ScrollView key={refreshKey} showsVerticalScrollIndicator={false}>
         {/* Header */}
         <View className="mt-2">
           <Text className="text-4xl font-bold">Settings</Text>
@@ -39,7 +42,7 @@ export default function SettingsScreen() {
           <Text className="mt-2 text-gray-500">Manage milk rates</Text>
         </View>
 
-        {/* Cow */}
+        {/* Cow Milk */}
         <View className="mt-8">
           <View className="flex-row items-center justify-between">
             <Text className="text-2xl font-bold">Cow Milk</Text>
@@ -59,22 +62,37 @@ export default function SettingsScreen() {
                 className="rounded-2xl border border-gray-200 bg-white p-4"
               >
                 <View className="flex-row items-center justify-between">
-                  <View>
+                  <View className="flex-1">
                     <Text className="font-semibold">
-                      {item.quantity}L — {getQuantityLabel(item.quantity)}
+                      {getQuantityLabel(item.quantity)}
                     </Text>
                   </View>
 
-                  <Text className="text-lg font-bold text-red-600">
-                    ₹ {item.price}
-                  </Text>
+                  <View className="flex-row items-center gap-3">
+                    <Text className="text-lg font-bold text-red-600">
+                      ₹ {item.price}
+                    </Text>
+
+                    <Pressable
+                      onPress={() => {
+                        deleteMilkRatePreset(item.id);
+
+                        setRefreshKey((prev) => prev + 1);
+                      }}
+                      className="rounded-full bg-red-100 px-3 py-2"
+                    >
+                      <Text className="text-xs font-semibold text-red-600">
+                        Delete
+                      </Text>
+                    </Pressable>
+                  </View>
                 </View>
               </View>
             ))}
           </View>
         </View>
 
-        {/* Buffalo */}
+        {/* Buffalo Milk */}
         <View className="mt-10 mb-20">
           <View className="flex-row items-center justify-between">
             <Text className="text-2xl font-bold">Buffalo Milk</Text>
@@ -94,15 +112,30 @@ export default function SettingsScreen() {
                 className="rounded-2xl border border-gray-200 bg-white p-4"
               >
                 <View className="flex-row items-center justify-between">
-                  <View>
+                  <View className="flex-1">
                     <Text className="font-semibold">
-                      {item.quantity}L — {getQuantityLabel(item.quantity)}
+                      {getQuantityLabel(item.quantity)}
                     </Text>
                   </View>
 
-                  <Text className="text-lg font-bold text-red-600">
-                    ₹ {item.price}
-                  </Text>
+                  <View className="flex-row items-center gap-3">
+                    <Text className="text-lg font-bold text-red-600">
+                      ₹ {item.price}
+                    </Text>
+
+                    <Pressable
+                      onPress={() => {
+                        deleteMilkRatePreset(item.id);
+
+                        setRefreshKey((prev) => prev + 1);
+                      }}
+                      className="rounded-full bg-red-100 px-3 py-2"
+                    >
+                      <Text className="text-xs font-semibold text-red-600">
+                        Delete
+                      </Text>
+                    </Pressable>
+                  </View>
                 </View>
               </View>
             ))}
@@ -116,6 +149,8 @@ export default function SettingsScreen() {
           onClose={() => setShowCowModal(false)}
           onSave={(quantity, price) => {
             createMilkRatePreset(milkBookId, "cow", quantity, price);
+
+            setRefreshKey((prev) => prev + 1);
           }}
         />
 
@@ -126,6 +161,8 @@ export default function SettingsScreen() {
           onClose={() => setShowBuffaloModal(false)}
           onSave={(quantity, price) => {
             createMilkRatePreset(milkBookId, "buffalo", quantity, price);
+
+            setRefreshKey((prev) => prev + 1);
           }}
         />
       </ScrollView>
