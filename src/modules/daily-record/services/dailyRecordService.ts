@@ -136,3 +136,27 @@ export function recalculateTotal(recordId: number) {
     [recordId],
   );
 }
+
+export function ensureTodayRecordExists(milkBookId: number, date: string) {
+  const existing = getDailyRecordByDate(milkBookId, date);
+
+  if (existing) {
+    return existing;
+  }
+
+  createEmptyDailyRecord(milkBookId, date);
+
+  return getDailyRecordByDate(milkBookId, date);
+}
+
+export function getDailyRecordById(id: number) {
+  return db.getFirstSync<DailyRecord>(
+    `
+      SELECT *
+      FROM daily_records
+
+      WHERE id = ?;
+    `,
+    [id],
+  );
+}

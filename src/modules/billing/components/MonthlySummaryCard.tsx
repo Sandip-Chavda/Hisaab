@@ -1,55 +1,43 @@
 import { View } from "react-native";
 
-import { MonthlySummary } from "../types";
-
 import { Text } from "@/shared/ui/Text";
 
-type Props = {
-  summary: MonthlySummary;
-};
-
-export function MonthlySummaryCard({ summary }: Props) {
+export function HomeSummaryCard() {
   return (
-    <View className="mt-6 rounded-3xl bg-red-600 p-5">
-      <Text className="text-lg font-bold text-white">Monthly Summary</Text>
-
-      <View className="mt-5 flex-row justify-between">
+    <View className="rounded-[32px] bg-red-100 p-6">
+      {/* Month */}
+      <View className="flex-row items-start justify-between">
         <View>
-          <Text className="text-sm text-red-100">Total Milk</Text>
+          <Text className="text-sm text-red-700">Current Month</Text>
 
-          <Text className="mt-1 text-2xl font-bold text-white">
-            {summary.totalQuantity.toFixed(1)} L
-          </Text>
+          <Text className="mt-1 text-3xl font-bold text-black">June 2026</Text>
         </View>
 
-        <View className="items-end">
-          <Text className="text-sm text-red-100">Total Bill</Text>
+        <View className="rounded-2xl bg-white px-4 py-2">
+          <Text className="text-xs text-gray-500">Total</Text>
 
-          <Text className="mt-1 text-2xl font-bold text-white">
-            ₹ {summary.totalAmount.toFixed(0)}
-          </Text>
+          <Text className="mt-1 text-lg font-bold text-red-600">₹ 0</Text>
         </View>
       </View>
 
-      <View className="mt-6 flex-row justify-between">
-        <View>
-          <Text className="text-red-100">
-            MC: {summary.totalMorningCow.toFixed(1)}L
-          </Text>
+      {/* Stats */}
+      <View className="mt-6 flex-row gap-3">
+        {/* Cow */}
+        <View className="flex-1 rounded-2xl bg-white p-4">
+          <Text className="text-sm text-gray-500">Cow Milk</Text>
 
-          <Text className="mt-1 text-red-100">
-            MB: {summary.totalMorningBuffalo.toFixed(1)}L
-          </Text>
+          <Text className="mt-3 text-2xl font-bold">0L</Text>
+
+          <Text className="mt-1 text-sm text-gray-500">₹ 0</Text>
         </View>
 
-        <View className="items-end">
-          <Text className="text-red-100">
-            NC: {summary.totalNightCow.toFixed(1)}L
-          </Text>
+        {/* Buffalo */}
+        <View className="flex-1 rounded-2xl bg-white p-4">
+          <Text className="text-sm text-gray-500">Buffalo Milk</Text>
 
-          <Text className="mt-1 text-red-100">
-            NB: {summary.totalNightBuffalo.toFixed(1)}L
-          </Text>
+          <Text className="mt-3 text-2xl font-bold">0L</Text>
+
+          <Text className="mt-1 text-sm text-gray-500">₹ 0</Text>
         </View>
       </View>
     </View>

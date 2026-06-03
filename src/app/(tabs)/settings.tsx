@@ -6,7 +6,7 @@ import { Text } from "@/shared/ui/Text";
 export default function SettingsScreen() {
   return (
     <Screen>
-      <View className="mt-6">
+      <View className="mt-2">
         <Text className="text-4xl font-bold">Settings</Text>
       </View>
     </Screen>
