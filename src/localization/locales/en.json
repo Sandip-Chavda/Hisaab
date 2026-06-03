@@ -1,0 +1,63 @@
+{
+  "appName": "Hisaab",
+
+  "home": "Home",
+  "history": "History",
+  "settings": "Settings",
+
+  "today": "Today",
+
+  "morning": "Morning",
+  "night": "Night",
+
+  "cow": "Cow",
+  "buffalo": "Buffalo",
+
+  "selectQuantity": "Select quantity",
+
+  "holiday": "Holiday",
+
+  "changesSaved": "Changes are saved automatically",
+
+  "monthlyTotal": "Monthly Total",
+
+  "total": "Total",
+
+  "quantity": "Quantity",
+
+  "monthlyMilkRecords": "Monthly milk records",
+
+  "monthlyArchive": "Monthly archive",
+
+  "currentMonth": "Current Month",
+
+  "open": "Open",
+
+  "invoice": "Invoice",
+
+  "monthlyRecords": "Monthly records",
+
+  "records": "records",
+
+  "edit": "Edit",
+
+  "correctOrUpdate": "Correct or update milk entries",
+
+  "manageMilkRates": "Manage milk rates",
+
+  "cowMilk": "Cow Milk",
+
+  "buffaloMilk": "Buffalo Milk",
+
+  "add": "Add",
+
+  "delete": "Delete",
+
+  "price": "Price",
+
+  "milkInvoice": "Monthly Milk Invoice",
+
+  "date": "Date",
+
+  "grandTotal": "Grand Total"
+}

@@ -1,0 +1,63 @@
+{
+  "appName": "હિસાબ",
+
+  "home": "હોમ",
+  "history": "રેકોર્ડ્સ",
+  "settings": "સેટિંગ્સ",
+
+  "today": "આજે",
+
+  "morning": "સવારે",
+  "night": "રાત્રે",
+
+  "cow": "ગાય",
+  "buffalo": "ભેંસ",
+
+  "selectQuantity": "સિલેક્ટ કરો",
+
+  "holiday": "રજા",
+
+  "changesSaved": "સેવ થઈ ગયુ છે",
+
+  "monthlyTotal": "મહિના નો ટોટલ",
+
+  "total": "ટોટલ",
+
+  "quantity": "દૂધ નુ માપ",
+
+  "monthlyMilkRecords": "મહિના નો દૂધ રેકોર્ડ્સ",
+
+  "monthlyArchive": "મહિના નો રેકોર્ડ્સ",
+
+  "currentMonth": "ચાલુ મહિનો",
+
+  "open": "ખોલો",
+
+  "invoice": "બિલ બનાવો",
+
+  "monthlyRecords": "મહિના નો દૂધ રેકોર્ડ્સ",
+
+  "records": "રેકોર્ડ્સ",
+
+  "edit": "સુધારો",
+
+  "correctOrUpdate": "સુધારો અથવા ઉપડેટ કરો",
+
+  "manageMilkRates": "ભાવ ઉમેરો",
+
+  "cowMilk": "ગાય ના દુધ નો ભાવ",
+
+  "buffaloMilk": "ભેંસ ના દુધ નો ભાવ",
+
+  "add": "ભાવ ઉમેરો",
+
+  "delete": "ડિલિટ કરો",
+
+  "price": "ભાવ",
+
+  "milkInvoice": "મહિના ના દુધ નુ બિલ",
+
+  "date": "તારીખ",
+
+  "grandTotal": "કુલ ટોટલ"
+}
