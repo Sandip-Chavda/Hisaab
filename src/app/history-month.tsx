@@ -1,6 +1,6 @@
 import { useFocusEffect, useLocalSearchParams } from "expo-router";
 
-import { FlatList, Pressable, View } from "react-native";
+import { FlatList, View } from "react-native";
 
 import { Screen } from "@/shared/ui/Screen";
 import { Text } from "@/shared/ui/Text";
@@ -9,7 +9,6 @@ import { HistoryRecordCard } from "@/modules/history/components/HistoryRecordCar
 
 import { getDailyRecords } from "@/modules/daily-record/services/dailyRecordService";
 import { DailyRecord } from "@/modules/daily-record/types";
-import { generateInvoiceHtml } from "@/modules/invoice/services/invoiceService";
 import { getOrCreateCurrentMilkBook } from "@/modules/milk-book/services/currentMilkBookService";
 import { useCallback, useState } from "react";
 
@@ -51,15 +50,6 @@ export default function HistoryMonthScreen() {
     }, [loadRecords]),
   );
 
-  function generateInvoice() {
-    const html = generateInvoiceHtml(
-      MONTH_NAMES[Number(month) - 1],
-      String(year),
-      records,
-    );
-
-    console.log(html);
-  }
   return (
     <Screen>
       <View className="mt-2">
@@ -82,17 +72,6 @@ export default function HistoryMonthScreen() {
           {records.length} records
         </Text>
       </View>
-
-      <Pressable
-        onPress={() => {
-          generateInvoice();
-        }}
-        className="mt-4 rounded-2xl bg-red-500 p-4"
-      >
-        <Text className="text-center text-lg font-bold text-white">
-          Generate Invoice
-        </Text>
-      </Pressable>
 
       <FlatList
         data={records}
