@@ -19,6 +19,8 @@ import { getMonthlySummary } from "@/modules/home/services/homeSummaryService";
 
 import { getOrCreateCurrentMilkBook } from "@/modules/milk-book/services/currentMilkBookService";
 
+import { changeAppLanguage } from "@/localization/i18n";
+
 import { getTodayDate } from "@/utils/date";
 import { useTranslation } from "react-i18next";
 
@@ -78,10 +80,10 @@ export default function HomeScreen() {
             {/* English */}
             <Pressable
               onPress={() => {
-                i18n.changeLanguage("en");
+                changeAppLanguage("en");
               }}
               className={`px-4 py-2 ${
-                i18n.language === "en" ? "bg-red-500" : "bg-white"
+                i18n.language === "en" ? "bg-red-600" : "bg-white"
               }`}
             >
               <Text
@@ -96,10 +98,10 @@ export default function HomeScreen() {
             {/* Gujarati */}
             <Pressable
               onPress={() => {
-                i18n.changeLanguage("gu");
+                changeAppLanguage("gu");
               }}
               className={`px-4 py-2 ${
-                i18n.language === "gu" ? "bg-red-500" : "bg-white"
+                i18n.language === "gu" ? "bg-red-600" : "bg-white"
               }`}
             >
               <Text
@@ -126,7 +128,7 @@ export default function HomeScreen() {
         {record && (
           <View className="mb-16 mt-6">
             <DailyRecordCard
-              key={summary.totalAmount}
+              key={`${summary.totalAmount}-${i18n.language}`}
               milkBookId={milkBookId}
               record={record}
               onRefresh={() => {

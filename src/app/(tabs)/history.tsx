@@ -13,6 +13,8 @@ import { getHistoryMonths } from "@/modules/history/services/historyService";
 
 import { getOrCreateCurrentMilkBook } from "@/modules/milk-book/services/currentMilkBookService";
 
+import { useTranslation } from "react-i18next";
+
 type HistoryMonth = {
   month: string;
 
@@ -23,6 +25,8 @@ type HistoryMonth = {
 
 export default function HistoryScreen() {
   const [months, setMonths] = useState<HistoryMonth[]>([]);
+
+  const { t, i18n } = useTranslation();
 
   const loadMonths = useCallback(() => {
     const milkBook = getOrCreateCurrentMilkBook();
@@ -45,7 +49,15 @@ export default function HistoryScreen() {
   return (
     <Screen>
       <View className="mt-2">
-        <Text className="text-3xl font-bold">History</Text>
+        <Text
+          className="font-bold text-black"
+          style={{
+            fontSize: 44,
+            lineHeight: 58,
+          }}
+        >
+          {t("history")}
+        </Text>
 
         <Text className="mt-2 text-gray-500">Monthly milk records</Text>
       </View>

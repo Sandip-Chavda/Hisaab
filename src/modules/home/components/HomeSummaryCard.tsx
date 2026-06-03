@@ -26,7 +26,7 @@ export function HomeSummaryCard({
   const year = now.getFullYear();
 
   return (
-    <View className="rounded-3xl border border-red-200 bg-red-700 p-5">
+    <View className="rounded-3xl border border-red-200 bg-red-600 p-5">
       <View className="flex-row items-start justify-between">
         <View>
           <Text className="text-xl font-semibold text-white">

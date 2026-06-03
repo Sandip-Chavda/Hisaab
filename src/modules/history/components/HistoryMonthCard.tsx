@@ -6,6 +6,8 @@ import { getDailyRecords } from "@/modules/daily-record/services/dailyRecordServ
 import { downloadInvoicePdf } from "@/modules/invoice/services/pdfInvoiceService";
 import { getOrCreateCurrentMilkBook } from "@/modules/milk-book/services/currentMilkBookService";
 import { Text } from "@/shared/ui/Text";
+import { getMonthName } from "@/utils/months";
+import { useTranslation } from "react-i18next";
 
 type Props = {
   month: number;
@@ -40,6 +42,8 @@ export function HistoryMonthCard({ month, year, totalAmount }: Props) {
   const isCurrentMonth =
     Number(month) === currentMonth && Number(year) === currentYear;
 
+  const { t, i18n } = useTranslation();
+
   function openMonth() {
     router.push({
       pathname: "/history-month",
@@ -62,11 +66,11 @@ export function HistoryMonthCard({ month, year, totalAmount }: Props) {
 
     Alert.alert(
       "Invoice",
-      `${MONTH_NAMES[month - 1]} ${year}`,
+      `${getMonthName(month, i18n.language)} ${year}`,
 
       [
         {
-          text: "Share Invoice",
+          text: "Download Bill",
 
           onPress: async () => {
             await downloadInvoicePdf(
@@ -96,18 +100,18 @@ export function HistoryMonthCard({ month, year, totalAmount }: Props) {
       <View className="flex-row items-center justify-between">
         <View>
           <Text className="text-2xl font-bold">
-            {MONTH_NAMES[month - 1]} {year}
+            {getMonthName(month, i18n.language)} {year}
           </Text>
 
           {isCurrentMonth && (
             <View className="mt-2 self-start rounded-full bg-red-100 px-2 py-1">
               <Text className="text-[10px] font-medium text-red-600">
-                Current Month
+                {t("currentMonth")}
               </Text>
             </View>
           )}
 
-          <Text className="mt-2 text-gray-500">Monthly archive</Text>
+          <Text className="mt-2 text-gray-500">{t("monthlyArchive")}</Text>
         </View>
 
         <View className="items-end">
@@ -126,7 +130,9 @@ export function HistoryMonthCard({ month, year, totalAmount }: Props) {
           onPress={openMonth}
           className="flex-1 rounded-2xl bg-black px-4 py-3"
         >
-          <Text className="text-center font-semibold text-white">Open</Text>
+          <Text className="text-center font-semibold text-white">
+            {t("open")}
+          </Text>
         </Pressable>
 
         {/* Invoice */}
@@ -136,7 +142,7 @@ export function HistoryMonthCard({ month, year, totalAmount }: Props) {
             className="flex-1 rounded-2xl bg-red-500 px-4 py-3"
           >
             <Text className="text-center font-semibold text-white">
-              Invoice
+              {t("invoice")}
             </Text>
           </Pressable>
         )}

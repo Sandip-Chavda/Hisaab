@@ -13,11 +13,11 @@
   "cow": "ગાય",
   "buffalo": "ભેંસ",
 
-  "selectQuantity": "સિલેક્ટ કરો",
+  "selectQuantity": "દૂધ નુ માપ સિલેક્ટ કરો",
 
   "holiday": "રજા",
 
-  "changesSaved": "સેવ થઈ ગયુ છે",
+  "changesSaved": "સિલેક્ટ કર્યા પછી સુધારો ઓટોમેટીક સેવ થઈ જશે.",
 
   "monthlyTotal": "મહિના નો ટોટલ",
 
@@ -43,7 +43,7 @@
 
   "correctOrUpdate": "સુધારો અથવા ઉપડેટ કરો",
 
-  "manageMilkRates": "ભાવ ઉમેરો",
+  "manageMilkRates": "અહિ તમે ભાવ ઉમેરી અને બદલી સકસો",
 
   "cowMilk": "ગાય ના દુધ નો ભાવ",
 
@@ -51,13 +51,33 @@
 
   "add": "ભાવ ઉમેરો",
 
+  "selectAndAddPrice": "માપ સિલેક્ટ કરો અને ભાવ લખો",
+
   "delete": "ડિલિટ કરો",
 
   "price": "ભાવ",
+
+  "placeholderPrice": "અહી ભાવ લખો",
 
   "milkInvoice": "મહિના ના દુધ નુ બિલ",
 
   "date": "તારીખ",
 
-  "grandTotal": "કુલ ટોટલ"
+  "grandTotal": "કુલ ટોટલ",
+
+  "save": "સેવ કરો / સાચવો",
+
+  "cancel": "બંધ કરો",
+
+  "invoiceDownloaded": "બિલ ડાઉનલોડ થઈ ગયું",
+
+  "savedSuccessfully": "સફળતાથી સેવ થયું",
+
+  "error": "એરર",
+
+  "failedInvoice": "બિલ ડાઉનલોડ કરવામાં સમસ્યા આવી",
+
+  "permissionRequired": "પરમિશન જરૂરી છે",
+
+  "allowFolderAccess": "ફોલ્ડર એક્સેસ આપો"
 }

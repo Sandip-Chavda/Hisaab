@@ -1,8 +1,11 @@
 import { Tabs } from "expo-router";
 
 import { Ionicons, MaterialCommunityIcons } from "@expo/vector-icons";
+import { useTranslation } from "react-i18next";
 
 export default function TabsLayout() {
+  const { t } = useTranslation();
+
   return (
     <Tabs
       screenOptions={{
@@ -29,7 +32,7 @@ export default function TabsLayout() {
         tabBarLabelStyle: {
           fontSize: 12,
 
-          fontWeight: "600",
+          fontWeight: "700",
         },
       }}
     >
@@ -37,7 +40,7 @@ export default function TabsLayout() {
       <Tabs.Screen
         name="index"
         options={{
-          title: "Home",
+          title: t("home"),
 
           tabBarIcon: ({ color, size, focused }) => (
             <Ionicons
@@ -53,7 +56,7 @@ export default function TabsLayout() {
       <Tabs.Screen
         name="history"
         options={{
-          title: "History",
+          title: t("history"),
 
           tabBarIcon: ({ color, size, focused }) => (
             <MaterialCommunityIcons
@@ -69,7 +72,7 @@ export default function TabsLayout() {
       <Tabs.Screen
         name="settings"
         options={{
-          title: "Settings",
+          title: t("settings"),
 
           tabBarIcon: ({ color, size, focused }) => (
             <Ionicons

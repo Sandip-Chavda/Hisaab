@@ -10,11 +10,15 @@ import { Screen } from "@/shared/ui/Screen";
 
 import { getOrCreateCurrentMilkBook } from "@/modules/milk-book/services/currentMilkBookService";
 import { Text } from "@/shared/ui/Text";
+
 import { formatDisplayDate } from "@/utils/date";
 import { useCallback, useState } from "react";
+import { useTranslation } from "react-i18next";
 
 export default function EditRecordScreen() {
   const { id } = useLocalSearchParams();
+
+  const { t, i18n } = useTranslation();
 
   const [record, setRecord] = useState(getDailyRecordById(Number(id)));
 
@@ -54,17 +58,15 @@ export default function EditRecordScreen() {
         <View className="mt-2">
           <Text className="text-3xl font-bold">
             <Text className="text-3xl font-bold">
-              Edit -- {formatDisplayDate(record.date)}
+              {t("edit")} - {formatDisplayDate(record.date)}
             </Text>
           </Text>
 
-          <Text className="mt-2 text-gray-500">
-            Correct or update milk entries
-          </Text>
+          <Text className="mt-2 text-gray-500">{t("correctOrUpdate")}</Text>
 
-          <View className="mt-5 rounded-2xl bg-gray-100 p-4">
-            <Text className="text-sm text-gray-600">
-              Changes are saved automatically
+          <View className="mt-5 rounded-2xl bg-green-100 p-4">
+            <Text className="text-sm text-green-600 text-center">
+              {t("changesSaved")}
             </Text>
           </View>
         </View>

@@ -5,6 +5,7 @@ import { MilkRatePreset } from "@/modules/milk-book/types/milkRatePreset";
 import { Text } from "@/shared/ui/Text";
 
 import { getQuantityLabel } from "@/utils/quantity";
+import { useTranslation } from "react-i18next";
 
 type Props = {
   visible: boolean;
@@ -22,6 +23,8 @@ export function QuantitySelectionModal({
   onClose,
   onSelect,
 }: Props) {
+  const { t, i18n } = useTranslation();
+
   return (
     <Modal visible={visible} transparent animationType="fade">
       <Pressable
@@ -35,7 +38,7 @@ export function QuantitySelectionModal({
           className="w-full rounded-3xl bg-white p-5"
           onPress={() => {}}
         >
-          <Text className="text-lg font-bold">Select Quantity</Text>
+          <Text className="text-lg font-bold">{t("selectQuantity")}</Text>
 
           <View className="mt-5 gap-3">
             {presets.map((preset) => (
@@ -55,7 +58,7 @@ export function QuantitySelectionModal({
                     </Text>
 
                     <Text className="mt-1 text-sm text-gray-500">
-                      {getQuantityLabel(preset.quantity)}
+                      {getQuantityLabel(preset.quantity, i18n.language)}
                     </Text>
                   </View>
 

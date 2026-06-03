@@ -1,7 +1,7 @@
 export const QUANTITY_OPTIONS = [
   {
     value: 0,
-    label: "રાજા",
+    label: "રજા",
   },
 
   {
@@ -40,12 +40,50 @@ export const QUANTITY_OPTIONS = [
   },
 ];
 
-export function getQuantityLabel(quantity: number | null) {
-  if (quantity === null || quantity === undefined) {
-    return "Select quantity";
+export function getQuantityLabel(
+  value: number,
+
+  language: string,
+) {
+  if (language === "gu") {
+    const guMap: Record<number, string> = {
+      0: "રજા",
+
+      0.5: "0.5L — અડધો શેર / લિટર",
+
+      0.75: "0.75L — પોણો શેર",
+
+      1: "1L — એક શેર / લિટર",
+
+      1.5: "1.5L — દોઢ શેર",
+
+      2: "2L — બે શેર / લિટર",
+
+      2.5: "2.5L — અઢી શેર / લિટર",
+
+      3: "3L — ત્રણ શેર / લિટર",
+    };
+
+    return guMap[value] || `${value}L`;
   }
 
-  const option = QUANTITY_OPTIONS.find((item) => item.value === quantity);
+  const enMap: Record<number, string> = {
+    0: "Holiday",
 
-  return option?.label ?? `${quantity}L`;
+    0.5: "0.5L — Half Liter",
+
+    0.75: "0.75L — Three Quarter",
+
+    1: "1L — One Liter",
+
+    1.5: "1.5L — One and Half",
+
+    2: "2L — Two Liter",
+
+    2.5: "2.5L — Two and Half",
+
+    3: "3L — Three Liter",
+  };
+
+  return enMap[value] || `${value}L`;
 }

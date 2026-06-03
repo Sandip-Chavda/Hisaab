@@ -6,6 +6,7 @@ import { Alert } from "react-native";
 
 import { generateInvoiceHtml } from "./invoiceService";
 
+import i18n from "@/locales/i18n";
 import { DailyRecord } from "@/modules/daily-record/types";
 
 export async function downloadInvoicePdf(
@@ -28,7 +29,7 @@ export async function downloadInvoicePdf(
       await FileSystem.StorageAccessFramework.requestDirectoryPermissionsAsync();
 
     if (!permissions.granted) {
-      Alert.alert("Permission Required", "Please allow folder access.");
+      Alert.alert(i18n.t("permissionRequired"), i18n.t("allowFolderAccess"));
 
       return;
     }
@@ -52,10 +53,13 @@ export async function downloadInvoicePdf(
       encoding: FileSystem.EncodingType.Base64,
     });
 
-    Alert.alert("Invoice Downloaded", `${fileName} saved successfully.`);
+    Alert.alert(
+      i18n.t("invoiceDownloaded"),
+      `${fileName} ${i18n.t("savedSuccessfully")}.`,
+    );
   } catch (error) {
     console.log(error);
 
-    Alert.alert("Error", "Failed to download invoice PDF.");
+    Alert.alert(i18n.t("error"), i18n.t("failedInvoice"));
   }
 }

@@ -7,6 +7,7 @@ import { Text } from "@/shared/ui/Text";
 import { getMilkRatePresets } from "@/modules/milk-book/services/milkRatePresetService";
 import { formatDisplayDate, getTodayDate } from "@/utils/date";
 import { useState } from "react";
+import { useTranslation } from "react-i18next";
 import { updateQuantityField } from "../services/dailyRecordService";
 import { QuantitySelectionModal } from "./QuantitySelectionModal";
 import { QuantitySelectorButton } from "./QuantitySelectorButton";
@@ -28,6 +29,8 @@ export function DailyRecordCard({ record, onRefresh, milkBookId }: Props) {
 
   const [activePresets, setActivePresets] = useState<any[]>([]);
 
+  const { t, i18n } = useTranslation();
+
   const isToday = record.date === getTodayDate();
 
   return (
@@ -44,7 +47,9 @@ export function DailyRecordCard({ record, onRefresh, milkBookId }: Props) {
 
           {isToday && (
             <View className="mt-1 self-start rounded-full bg-red-100 px-2 py-1">
-              <Text className="text-xs font-medium text-red-600">Today</Text>
+              <Text className="text-xs font-medium text-red-600">
+                {t("today")}
+              </Text>
             </View>
           )}
         </View>
@@ -70,14 +75,14 @@ export function DailyRecordCard({ record, onRefresh, milkBookId }: Props) {
         {/* Morning */}
         <View>
           <Text className="text-center text-sm font-semibold text-gray-600">
-            Morning
+            {t("morning")}
           </Text>
 
           <View className="mt-3 gap-3">
             {/* Cow */}
             <View>
               <Text className="mb-2 text-lg text-gray-600 font-semibold">
-                Cow
+                {t("cow")}
               </Text>
 
               <QuantitySelectorButton
@@ -93,7 +98,7 @@ export function DailyRecordCard({ record, onRefresh, milkBookId }: Props) {
             {/* Buffalo */}
             <View>
               <Text className="mb-2 text-lg text-gray-600 font-semibold">
-                Buffalo
+                {t("buffalo")}
               </Text>
 
               <QuantitySelectorButton
@@ -116,14 +121,14 @@ export function DailyRecordCard({ record, onRefresh, milkBookId }: Props) {
         {/* Night */}
         <View>
           <Text className="text-center text-sm font-semibold text-gray-600">
-            Night
+            {t("night")}
           </Text>
 
           <View className="mt-3 gap-3">
             {/* Cow */}
             <View>
               <Text className="mb-2 text-lg text-gray-600 font-semibold">
-                Cow
+                {t("cow")}
               </Text>
 
               <QuantitySelectorButton
@@ -139,7 +144,7 @@ export function DailyRecordCard({ record, onRefresh, milkBookId }: Props) {
             {/* Buffalo */}
             <View>
               <Text className="mb-2 text-lg text-gray-600 font-semibold">
-                Buffalo
+                {t("buffalo")}
               </Text>
 
               <QuantitySelectorButton

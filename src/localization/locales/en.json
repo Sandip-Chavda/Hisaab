@@ -51,13 +51,33 @@
 
   "add": "Add",
 
+  "selectAndAddPrice": "Select and Add Price",
+
   "delete": "Delete",
 
   "price": "Price",
+
+  "placeholderPrice": "Write Price Here",
 
   "milkInvoice": "Monthly Milk Invoice",
 
   "date": "Date",
 
-  "grandTotal": "Grand Total"
+  "grandTotal": "Grand Total",
+
+  "save": "Save",
+
+  "cancel": "Cancel",
+
+  "invoiceDownloaded": "Invoice Downloaded",
+
+  "savedSuccessfully": "Saved successfully",
+
+  "error": "Error",
+
+  "failedInvoice": "Failed to download invoice PDF",
+
+  "permissionRequired": "Permission Required",
+
+  "allowFolderAccess": "Please allow folder access"
 }

@@ -1,12 +1,12 @@
 import { DailyRecord } from "@/modules/daily-record/types";
 
+import i18n from "@/localization/i18n";
+
+import { getMonthName } from "@/utils/months";
+
 function formatQty(value: number | null) {
   if (value === null) {
     return "-";
-  }
-
-  if (value === 0) {
-    return "રાજા";
   }
 
   return `${value}L`;
@@ -58,25 +58,40 @@ export function generateInvoiceHtml(
 
     <body>
       <h1>
-        Hisaab Milk Invoice
+        ${i18n.t("milkInvoice")}
       </h1>
 
       <p>
-        ${month} ${year}
+        ${getMonthName(Number(month), i18n.language)} ${year}
       </p>
 
       <table>
         <tr>
           <th>No</th>
-          <th>Date</th>
 
-          <th>Morning Cow</th>
-          <th>Morning Buffalo</th>
+          <th>
+            ${i18n.t("date")}
+          </th>
 
-          <th>Night Cow</th>
-          <th>Night Buffalo</th>
+          <th>
+            ${i18n.t("morning")} ${i18n.t("cow")}
+          </th>
 
-          <th>Price</th>
+          <th>
+            ${i18n.t("morning")} ${i18n.t("buffalo")}
+          </th>
+
+          <th>
+            ${i18n.t("night")} ${i18n.t("cow")}
+          </th>
+
+          <th>
+            ${i18n.t("night")} ${i18n.t("buffalo")}
+          </th>
+
+          <th>
+            ${i18n.t("price")}
+          </th>
         </tr>
 
         ${records
@@ -117,7 +132,7 @@ export function generateInvoiceHtml(
       </table>
 
       <div class="footer">
-        Total: ₹${totalAmount}
+        ${i18n.t("grandTotal")}: ₹${totalAmount}
       </div>
     </body>
   </html>

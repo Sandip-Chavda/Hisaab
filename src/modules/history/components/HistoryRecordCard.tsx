@@ -1,5 +1,9 @@
 import { Pressable, View } from "react-native";
 
+import { useRouter } from "expo-router";
+
+import { useTranslation } from "react-i18next";
+
 import { DailyRecord } from "@/modules/daily-record/types";
 
 import { Text } from "@/shared/ui/Text";
@@ -7,28 +11,25 @@ import { Text } from "@/shared/ui/Text";
 import { formatDisplayDate, getTodayDate } from "@/utils/date";
 
 import { getQuantityLabel } from "@/utils/quantity";
-import { useRouter } from "expo-router";
 
 type Props = {
   record: DailyRecord;
 };
 
-function formatQuantity(value: number | null) {
-  if (value === null) {
-    return "--";
-  }
-
-  if (value === 0) {
-    return "રજા";
-  }
-
-  return getQuantityLabel(value);
-}
-
 export function HistoryRecordCard({ record }: Props) {
+  const router = useRouter();
+
+  const { t, i18n } = useTranslation();
+
   const isToday = record.date === getTodayDate();
 
-  const router = useRouter();
+  function formatQuantity(value: number | null) {
+    if (value === null) {
+      return "--";
+    }
+
+    return getQuantityLabel(value, i18n.language);
+  }
 
   return (
     <View
@@ -46,7 +47,7 @@ export function HistoryRecordCard({ record }: Props) {
           {isToday && (
             <View className="rounded-full bg-red-100 px-2 py-1">
               <Text className="text-[10px] font-medium text-red-600">
-                Today
+                {t("today")}
               </Text>
             </View>
           )}
@@ -58,7 +59,7 @@ export function HistoryRecordCard({ record }: Props) {
           }}
           className="rounded-xl bg-blue-100 px-7 py-3"
         >
-          <Text className="text-sm font-medium text-gray-700">Edit</Text>
+          <Text className="text-sm font-medium text-gray-700">{t("edit")}</Text>
         </Pressable>
       </View>
 
@@ -67,12 +68,12 @@ export function HistoryRecordCard({ record }: Props) {
         {/* Morning */}
         <View className="flex-1">
           <Text className="text-xs font-semibold uppercase text-gray-400">
-            Morning
+            {t("morning")}
           </Text>
 
           <View className="mt-3 gap-2">
             <View className="flex-row">
-              <Text className="w-12 text-sm text-gray-700">Cow</Text>
+              <Text className="w-12 text-sm text-gray-700">{t("cow")}</Text>
 
               <Text className="flex-1 text-xs text-gray-500">
                 → {formatQuantity(record.morning_cow_qty)}
@@ -80,7 +81,7 @@ export function HistoryRecordCard({ record }: Props) {
             </View>
 
             <View className="flex-row">
-              <Text className="w-12 text-sm text-gray-700">Buff</Text>
+              <Text className="w-12 text-sm text-gray-700">{t("buffalo")}</Text>
 
               <Text className="flex-1 text-xs text-gray-500">
                 → {formatQuantity(record.morning_buffalo_qty)}
@@ -95,12 +96,12 @@ export function HistoryRecordCard({ record }: Props) {
         {/* Night */}
         <View className="flex-1">
           <Text className="text-xs font-semibold uppercase text-gray-400">
-            Night
+            {t("night")}
           </Text>
 
           <View className="mt-3 gap-2">
             <View className="flex-row">
-              <Text className="w-12 text-sm text-gray-700">Cow</Text>
+              <Text className="w-12 text-sm text-gray-700">{t("cow")}</Text>
 
               <Text className="flex-1 text-xs text-gray-500">
                 → {formatQuantity(record.night_cow_qty)}
@@ -108,7 +109,7 @@ export function HistoryRecordCard({ record }: Props) {
             </View>
 
             <View className="flex-row">
-              <Text className="w-12 text-sm text-gray-700">Buff</Text>
+              <Text className="w-12 text-sm text-gray-700">{t("buffalo")}</Text>
 
               <Text className="flex-1 text-xs text-gray-500">
                 → {formatQuantity(record.night_buffalo_qty)}

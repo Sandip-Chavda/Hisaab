@@ -16,10 +16,13 @@ import {
 import { getOrCreateCurrentMilkBook } from "@/modules/milk-book/services/currentMilkBookService";
 
 import { getQuantityLabel } from "@/utils/quantity";
+import { useTranslation } from "react-i18next";
 import Toast from "react-native-toast-message";
 
 export default function SettingsScreen() {
   const milkBook = getOrCreateCurrentMilkBook();
+
+  const { t, i18n } = useTranslation();
 
   const milkBookId = milkBook?.id ?? 1;
 
@@ -38,21 +41,29 @@ export default function SettingsScreen() {
       <ScrollView key={refreshKey} showsVerticalScrollIndicator={false}>
         {/* Header */}
         <View className="mt-2">
-          <Text className="text-4xl font-bold">Settings</Text>
+          <Text
+            className="font-bold text-black"
+            style={{
+              fontSize: 44,
+              lineHeight: 58,
+            }}
+          >
+            {t("settings")}
+          </Text>
 
-          <Text className="mt-2 text-gray-500">Manage milk rates</Text>
+          <Text className="mt-2 text-gray-500">{t("manageMilkRates")}</Text>
         </View>
 
         {/* Cow Milk */}
         <View className="mt-8">
           <View className="flex-row items-center justify-between">
-            <Text className="text-2xl font-bold">Cow Milk</Text>
+            <Text className="text-2xl font-bold">{t("cowMilk")}</Text>
 
             <Pressable
               onPress={() => setShowCowModal(true)}
               className="rounded-full bg-red-500 px-4 py-2"
             >
-              <Text className="text-white">Add</Text>
+              <Text className="text-white font-semibold">{t("add")}</Text>
             </Pressable>
           </View>
 
@@ -65,7 +76,7 @@ export default function SettingsScreen() {
                 <View className="flex-row items-center justify-between">
                   <View className="flex-1">
                     <Text className="font-semibold">
-                      {getQuantityLabel(item.quantity)}
+                      {getQuantityLabel(item.quantity, i18n.language)}
                     </Text>
                   </View>
 
@@ -90,7 +101,7 @@ export default function SettingsScreen() {
                       className="rounded-full bg-red-100 px-3 py-2"
                     >
                       <Text className="text-xs font-semibold text-red-600">
-                        Delete
+                        🗑️{t("delete")}
                       </Text>
                     </Pressable>
                   </View>
@@ -103,13 +114,13 @@ export default function SettingsScreen() {
         {/* Buffalo Milk */}
         <View className="mt-10 mb-20">
           <View className="flex-row items-center justify-between">
-            <Text className="text-2xl font-bold">Buffalo Milk</Text>
+            <Text className="text-2xl font-bold">{t("buffaloMilk")}</Text>
 
             <Pressable
               onPress={() => setShowBuffaloModal(true)}
               className="rounded-full bg-red-500 px-4 py-2"
             >
-              <Text className="text-white">Add</Text>
+              <Text className="text-white font-semibold">{t("add")}</Text>
             </Pressable>
           </View>
 
@@ -122,7 +133,7 @@ export default function SettingsScreen() {
                 <View className="flex-row items-center justify-between">
                   <View className="flex-1">
                     <Text className="font-semibold">
-                      {getQuantityLabel(item.quantity)}
+                      {getQuantityLabel(item.quantity, i18n.language)}
                     </Text>
                   </View>
 
@@ -147,7 +158,7 @@ export default function SettingsScreen() {
                       className="rounded-full bg-red-100 px-3 py-2"
                     >
                       <Text className="text-xs font-semibold text-red-600">
-                        Delete
+                        🗑️{t("delete")}
                       </Text>
                     </Pressable>
                   </View>
