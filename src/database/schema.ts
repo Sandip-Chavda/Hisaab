@@ -37,11 +37,11 @@ CREATE TABLE IF NOT EXISTS daily_records (
   night_cow_qty REAL DEFAULT NULL,
   night_buffalo_qty REAL DEFAULT NULL,
 
- morning_cow_amount REAL DEFAULT 0,
-morning_buffalo_amount REAL DEFAULT 0,
+  morning_cow_amount REAL DEFAULT 0,
+  morning_buffalo_amount REAL DEFAULT 0,
 
-night_cow_amount REAL DEFAULT 0,
-night_buffalo_amount REAL DEFAULT 0,
+  night_cow_amount REAL DEFAULT 0,
+  night_buffalo_amount REAL DEFAULT 0,
 
   total_amount REAL DEFAULT 0,
 

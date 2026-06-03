@@ -30,10 +30,23 @@ export function createEmptyDailyRecord(milkBookId: number, date: string) {
     `
       INSERT OR IGNORE INTO daily_records (
         milk_book_id,
-        date
+        date,
+
+        morning_cow_amount,
+        morning_buffalo_amount,
+
+        night_cow_amount,
+        night_buffalo_amount,
+
+        total_amount
       )
 
-      VALUES (?, ?);
+      VALUES (
+        ?, ?,
+        0, 0,
+        0, 0,
+        0
+      );
     `,
     [milkBookId, date],
   );

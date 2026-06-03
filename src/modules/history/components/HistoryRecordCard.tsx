@@ -56,9 +56,9 @@ export function HistoryRecordCard({ record }: Props) {
           onPress={() => {
             router.push(`/edit-record/${record.id}`);
           }}
-          className="rounded-xl bg-gray-100 px-3 py-2"
+          className="rounded-xl bg-blue-100 px-7 py-3"
         >
-          <Text className="text-xs font-medium text-gray-700">Edit</Text>
+          <Text className="text-sm font-medium text-gray-700">Edit</Text>
         </Pressable>
       </View>
 

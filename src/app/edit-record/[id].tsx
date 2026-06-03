@@ -8,7 +8,9 @@ import { getDailyRecordById } from "@/modules/daily-record/services/dailyRecordS
 
 import { Screen } from "@/shared/ui/Screen";
 
+import { getOrCreateCurrentMilkBook } from "@/modules/milk-book/services/currentMilkBookService";
 import { Text } from "@/shared/ui/Text";
+import { formatDisplayDate } from "@/utils/date";
 import { useCallback, useState } from "react";
 
 export default function EditRecordScreen() {
@@ -22,7 +24,9 @@ export default function EditRecordScreen() {
     setRecord(updated);
   }, [id]);
 
-  const milkBookId = 1;
+  const milkBook = getOrCreateCurrentMilkBook();
+
+  const milkBookId = milkBook?.id || 1;
 
   useFocusEffect(
     useCallback(() => {
@@ -48,12 +52,24 @@ export default function EditRecordScreen() {
 
       <Screen>
         <View className="mt-2">
-          <Text className="text-3xl font-bold">Edit Entry</Text>
+          <Text className="text-3xl font-bold">
+            <Text className="text-3xl font-bold">
+              Edit -- {formatDisplayDate(record.date)}
+            </Text>
+          </Text>
 
-          <Text className="mt-2 text-gray-500">Update milk quantities</Text>
+          <Text className="mt-2 text-gray-500">
+            Correct or update milk entries
+          </Text>
+
+          <View className="mt-5 rounded-2xl bg-gray-100 p-4">
+            <Text className="text-sm text-gray-600">
+              Changes are saved automatically
+            </Text>
+          </View>
         </View>
 
-        <View className="mt-6">
+        <View className="mt-5">
           <DailyRecordCard
             milkBookId={milkBookId}
             record={record}

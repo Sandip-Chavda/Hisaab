@@ -1,36 +1,53 @@
 import { ScrollView, View } from "react-native";
 
+import { useCallback, useState } from "react";
+
+import { useFocusEffect } from "expo-router";
+
 import { Screen } from "@/shared/ui/Screen";
 import { Text } from "@/shared/ui/Text";
 
 import { DailyRecordCard } from "@/modules/daily-record/components/DailyRecordCard";
+
 import { ensureTodayRecordExists } from "@/modules/daily-record/services/dailyRecordService";
+
 import { DailyRecord } from "@/modules/daily-record/types";
+
 import { HomeSummaryCard } from "@/modules/home/components/HomeSummaryCard";
+
 import { getMonthlySummary } from "@/modules/home/services/homeSummaryService";
+
+import { getOrCreateCurrentMilkBook } from "@/modules/milk-book/services/currentMilkBookService";
+
 import { getTodayDate } from "@/utils/date";
-import { useFocusEffect } from "expo-router";
-import { useCallback, useState } from "react";
 
 export default function HomeScreen() {
   const [record, setRecord] = useState<DailyRecord | null>(null);
+
+  const [milkBookId, setMilkBookId] = useState<number>(1);
+
   const [summary, setSummary] = useState({
     totalAmount: 0,
     cowQuantity: 0,
     buffaloQuantity: 0,
   });
 
-  // Temporary fixed month id
-  const milkBookId = 1;
-
   const loadHomeData = useCallback(() => {
-    const todayRecord = ensureTodayRecordExists(milkBookId, getTodayDate());
+    const milkBook = getOrCreateCurrentMilkBook();
+
+    if (!milkBook) {
+      return;
+    }
+
+    setMilkBookId(milkBook.id);
+
+    const todayRecord = ensureTodayRecordExists(milkBook.id, getTodayDate());
 
     if (todayRecord) {
       setRecord(todayRecord);
     }
 
-    setSummary(getMonthlySummary(milkBookId));
+    setSummary(getMonthlySummary(milkBook.id));
   }, []);
 
   useFocusEffect(
@@ -58,20 +75,12 @@ export default function HomeScreen() {
 
         {/* Today Record */}
         {record && (
-          <View className="mt-6 mb-16">
+          <View className="mb-16 mt-6">
             <DailyRecordCard
               milkBookId={milkBookId}
               record={record}
               onRefresh={() => {
-                const updated = ensureTodayRecordExists(
-                  milkBookId,
-                  getTodayDate(),
-                );
-
-                if (updated) {
-                  setRecord(updated);
-                  setSummary(getMonthlySummary(milkBookId));
-                }
+                loadHomeData();
               }}
             />
           </View>
