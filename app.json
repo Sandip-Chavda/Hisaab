@@ -15,7 +15,7 @@
       "package": "com.hisaab.app",
       "adaptiveIcon": {
         "backgroundColor": "#ffffff",
-        "foregroundImage": "./assets/images/icon.png"
+        "foregroundImage": "./assets/images/foreground.png"
       },
       "predictiveBackGestureEnabled": false
     },

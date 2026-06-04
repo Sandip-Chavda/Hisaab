@@ -74,7 +74,8 @@ export function HistoryMonthCard({ month, year, totalAmount }: Props) {
 
           onPress: async () => {
             await downloadInvoicePdf(
-              MONTH_NAMES[month - 1],
+              // MONTH_NAMES[month - 1],
+              getMonthName(month, i18n.language),
               String(year),
               records,
             );
