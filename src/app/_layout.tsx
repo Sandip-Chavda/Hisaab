@@ -16,7 +16,9 @@ export default function RootLayout() {
     async function setup() {
       await initI18n();
 
-      setReady(true);
+      setTimeout(() => {
+        setReady(true);
+      }, 200);
     }
 
     setup();
