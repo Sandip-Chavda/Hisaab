@@ -11,6 +11,7 @@ import { getDailyRecords } from "@/modules/daily-record/services/dailyRecordServ
 import { DailyRecord } from "@/modules/daily-record/types";
 import { getOrCreateCurrentMilkBook } from "@/modules/milk-book/services/currentMilkBookService";
 
+import { formatIndianCurrency } from "@/utils/currency";
 import { useCallback, useState } from "react";
 
 const MONTH_NAMES = [
@@ -66,7 +67,9 @@ export default function HistoryMonthScreen() {
 
         <Text className="mt-2 text-3xl font-bold text-red-600">
           ₹{" "}
-          {records.reduce((sum, item) => sum + item.total_amount, 0).toFixed(0)}
+          {formatIndianCurrency(
+            records.reduce((sum, item) => sum + item.total_amount, 0),
+          )}
         </Text>
 
         <Text className="mt-2 text-sm text-gray-500">

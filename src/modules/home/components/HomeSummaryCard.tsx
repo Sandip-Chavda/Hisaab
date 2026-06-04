@@ -1,6 +1,7 @@
 import { View } from "react-native";
 
 import { Text } from "@/shared/ui/Text";
+import { formatIndianCurrency } from "@/utils/currency";
 import { getMonthName } from "@/utils/months";
 import { useTranslation } from "react-i18next";
 
@@ -34,7 +35,7 @@ export function HomeSummaryCard({
           </Text>
 
           <Text className="mt-3 text-4xl font-bold text-white">
-            ₹ {totalAmount.toFixed(0)}
+            ₹ {formatIndianCurrency(totalAmount)}
           </Text>
         </View>
 

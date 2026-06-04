@@ -81,19 +81,19 @@ export function getDailyRecordByDate(milkBookId: number, date: string) {
 }
 
 export function calculateTotalAmount(record: {
-  morning_cow_amount: number;
+  morning_cow_amount: number | null;
 
-  morning_buffalo_amount: number;
+  morning_buffalo_amount: number | null;
 
-  night_cow_amount: number;
+  night_cow_amount: number | null;
 
-  night_buffalo_amount: number;
+  night_buffalo_amount: number | null;
 }) {
   return (
-    record.morning_cow_amount +
-    record.morning_buffalo_amount +
-    record.night_cow_amount +
-    record.night_buffalo_amount
+    (record.morning_cow_amount ?? 0) +
+    (record.morning_buffalo_amount ?? 0) +
+    (record.night_cow_amount ?? 0) +
+    (record.night_buffalo_amount ?? 0)
   );
 }
 
@@ -135,13 +135,13 @@ export function recalculateTotal(recordId: number) {
       SET
         total_amount =
           (
-            morning_cow_amount
+            COALESCE(morning_cow_amount, 0)
             +
-            morning_buffalo_amount
+            COALESCE(morning_buffalo_amount, 0)
             +
-            night_cow_amount
+            COALESCE(night_cow_amount, 0)
             +
-            night_buffalo_amount
+            COALESCE(night_buffalo_amount, 0)
           )
 
       WHERE id = ?;

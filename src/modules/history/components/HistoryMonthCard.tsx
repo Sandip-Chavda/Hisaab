@@ -6,6 +6,7 @@ import { getDailyRecords } from "@/modules/daily-record/services/dailyRecordServ
 import { downloadInvoicePdf } from "@/modules/invoice/services/pdfInvoiceService";
 import { getOrCreateCurrentMilkBook } from "@/modules/milk-book/services/currentMilkBookService";
 import { Text } from "@/shared/ui/Text";
+import { formatIndianCurrency } from "@/utils/currency";
 import { getMonthName } from "@/utils/months";
 import { useTranslation } from "react-i18next";
 
@@ -119,7 +120,7 @@ export function HistoryMonthCard({ month, year, totalAmount }: Props) {
           <Text className="text-xs text-gray-500">Total</Text>
 
           <Text className="mt-1 text-xl font-bold text-red-600">
-            ₹ {totalAmount.toFixed(0)}
+            ₹ {formatIndianCurrency(totalAmount)}
           </Text>
         </View>
       </View>

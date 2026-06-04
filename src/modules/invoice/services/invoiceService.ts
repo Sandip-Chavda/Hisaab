@@ -2,6 +2,7 @@ import { DailyRecord } from "@/modules/daily-record/types";
 
 import i18n from "@/localization/i18n";
 
+import { formatIndianCurrency } from "@/utils/currency";
 import { getMonthName } from "@/utils/months";
 
 function formatQty(value: number | null) {
@@ -123,7 +124,7 @@ export function generateInvoiceHtml(
               </td>
 
               <td>
-                ₹${item.total_amount}
+                ₹${formatIndianCurrency(item.total_amount)}
               </td>
             </tr>
           `,
@@ -132,7 +133,7 @@ export function generateInvoiceHtml(
       </table>
 
       <div class="footer">
-        ${i18n.t("grandTotal")}: ₹${totalAmount}
+        ${i18n.t("grandTotal")}: ₹${formatIndianCurrency(totalAmount)}
       </div>
     </body>
   </html>
