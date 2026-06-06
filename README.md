@@ -1,56 +1,266 @@
-# Welcome to your Expo app 👋
+# <div align="center">
 
-This is an [Expo](https://expo.dev) project created with [`create-expo-app`](https://www.npmjs.com/package/create-expo-app).
+<img src="./assets/banner.png" alt="Hisaab Banner" />
 
-## Get started
+# 🥛 Hisaab - Offline First Architecture
 
-1. Install dependencies
+### Personal Milk Billing Tracker
 
-   ```bash
-   npm install
-   ```
+A modern offline-first milk register app for households and families.
 
-2. Start the app
+<img src="https://img.shields.io/badge/Expo-React%20Native-black?style=for-the-badge&logo=expo" />
+<img src="https://img.shields.io/badge/Offline%20First-SQLite-red?style=for-the-badge" />
+<img src="https://img.shields.io/badge/Platform-Android-white?style=for-the-badge" />
 
-   ```bash
-   npx expo start
-   ```
+</div>
 
-In the output, you'll find options to open the app in a
+---
 
-- [development build](https://docs.expo.dev/develop/development-builds/introduction/)
-- [Android emulator](https://docs.expo.dev/workflow/android-studio-emulator/)
-- [iOS simulator](https://docs.expo.dev/workflow/ios-simulator/)
-- [Expo Go](https://expo.dev/go), a limited sandbox for trying out app development with Expo
+# ✨ Overview
 
-You can start developing by editing the files inside the **app** directory. This project uses [file-based routing](https://docs.expo.dev/router/introduction).
+Hisaab is a minimal and modern milk billing tracker inspired by traditional household milk notebooks.
 
-## Get a fresh project
+Track daily milk entries, calculate monthly bills, and generate invoices — all offline.
 
-When you're ready, run:
+Designed for:
 
-```bash
-npm run reset-project
+- 🏠 Families
+- 🥛 Daily milk buyers
+- 📒 Traditional milk register users
+- 🌾 Village & city households
+
+---
+
+# 📱 Screenshots
+
+| Home                  | History               | Invoice               |
+| --------------------- | --------------------- | --------------------- |
+| Screenshots goes here | Screenshots goes here | Screenshots goes here |
+
+---
+
+# 🎥 Demo
+
+> Add your demo video or GIF here
+
+---
+
+# 🚀 Features
+
+## 🥛 Daily Milk Register
+
+Track:
+
+- Morning Cow Milk
+- Morning Buffalo Milk
+- Night Cow Milk
+- Night Buffalo Milk
+
+---
+
+## 📒 Notebook-Like Experience
+
+- One day = one row
+- Extremely fast entry flow
+- Minimal typing
+- Clean layout
+
+---
+
+## 💰 Automatic Billing
+
+- Auto total calculation
+- Monthly summaries
+- Historical pricing support
+- Indian number formatting
+
+Examples:
+
+```txt
+1,000
+10,000
+1,00,000
 ```
 
-This command will move the starter code to the **app-example** directory and create a blank **app** directory where you can start developing.
+---
 
-### Other setup steps
+## 🧾 PDF Invoice Generation
 
-- To set up ESLint for linting, run `npx expo lint`, or follow our guide on ["Using ESLint and Prettier"](https://docs.expo.dev/guides/using-eslint/)
-- If you'd like to set up unit testing, follow our guide on ["Unit Testing with Jest"](https://docs.expo.dev/develop/unit-testing/)
-- Learn more about the TypeScript setup in this template in our guide on ["Using TypeScript"](https://docs.expo.dev/guides/typescript/)
+Generate clean monthly invoices directly from the app.
 
-## Learn more
+Features:
 
-To learn more about developing your project with Expo, look at the following resources:
+- Table-based invoice layout
+- Localized labels
+- Offline PDF generation
+- Android folder save support
 
-- [Expo documentation](https://docs.expo.dev/): Learn fundamentals, or go into advanced topics with our [guides](https://docs.expo.dev/guides).
-- [Learn Expo tutorial](https://docs.expo.dev/tutorial/introduction/): Follow a step-by-step tutorial where you'll create a project that runs on Android, iOS, and the web.
+---
 
-## Join the community
+## 🌍 Localization
 
-Join our community of developers creating universal apps.
+Currently supports:
 
-- [Expo on GitHub](https://github.com/expo/expo): View our open source platform and contribute.
-- [Discord community](https://chat.expo.dev): Chat with Expo users and ask questions.
+- 🇬🇧 English
+- 🇮🇳 Gujarati
+
+Dynamic language switching supported.
+
+---
+
+## 📦 Offline First
+
+Everything works fully offline using SQLite.
+
+No internet required.
+
+---
+
+# 🧠 Smart Quantity Logic
+
+| State  | Meaning                      |
+| ------ | ---------------------------- |
+| `null` | untouched / not entered      |
+| `0`    | Raja / intentionally no milk |
+| `>0`   | milk quantity                |
+
+Invoice behavior:
+
+| Value     | Display       |
+| --------- | ------------- |
+| untouched | `-`           |
+| Raja      | `0L`          |
+| quantity  | actual liters |
+
+---
+
+# 🏗️ Tech Stack
+
+## Frontend
+
+- React Native
+- Expo
+- Expo Router
+- TypeScript
+- NativeWind
+
+## Database
+
+- expo-sqlite
+- Offline-first architecture
+
+## Localization
+
+- i18next
+
+## PDF
+
+- expo-print
+- expo-file-system
+
+---
+
+# 🎨 Design Philosophy
+
+Hisaab is designed to feel like:
+
+> A modern digital milk notebook.
+
+### UI Goals
+
+- Minimal
+- Peaceful
+- Spacious
+- Fast
+- Familiar
+
+---
+
+# 📂 Project Structure
+
+```bash
+src/
+ ├── app/
+ ├── modules/
+ ├── shared/
+ ├── database/
+ ├── localization/
+ ├── utils/
+ └── assets/
+```
+
+---
+
+# ⚡ Current Status
+
+## ✅ Completed
+
+- Home Screen
+- Daily Register
+- Monthly History
+- Edit Records
+- Pricing Presets
+- Localization
+- PDF Invoice Export
+- Android Preview Builds
+- Tablet Support
+- Offline Storage
+
+---
+
+# 🔮 Planned Features
+
+- WhatsApp invoice sharing
+- Cloud backup
+- Multiple milk books
+- Analytics
+- Unit system selection
+- Custom quantity presets
+
+---
+
+# 📸 Branding
+
+### Theme Colors
+
+| Color       | Hex       |
+| ----------- | --------- |
+| Primary Red | `#e7000b` |
+| Black       | `#000000` |
+| White       | `#ffffff` |
+
+---
+
+# 🛠️ Installation
+
+```bash
+git clone <repo-url>
+
+cd hisaab
+
+npm install
+
+npx expo start
+```
+
+---
+
+# 📦 Build APK
+
+```bash
+eas build --platform android --profile preview
+```
+
+---
+
+# ❤️ Philosophy
+
+Hisaab is built to replace paper milk notebooks with a simple, modern, and reliable digital experience.
+
+Fast. Offline. Familiar.
+
+---
+
+# 👨‍💻 Developer
+
+Made with ❤️ using React Native + Expo
