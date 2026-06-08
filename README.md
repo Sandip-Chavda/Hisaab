@@ -31,6 +31,18 @@ Designed for:
 
 ---
 
+# 🎥 Demo
+<div align="center">
+  
+
+https://github.com/user-attachments/assets/1f7d5004-58b4-4d4a-bb27-d1d822eee102
+
+
+</div>
+
+
+---
+
 # 📱 Screenshots
 
 <div align="center">
@@ -98,11 +110,6 @@ Designed for:
 
 ---
 
-# 🎥 Demo
-
-> Add your demo video or GIF here
-
----
 
 # 🚀 Features
 
