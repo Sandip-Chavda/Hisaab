@@ -33,9 +33,68 @@ Designed for:
 
 # 📱 Screenshots
 
-| Home                  | History               | Invoice               |
-| --------------------- | --------------------- | --------------------- |
-| Screenshots goes here | Screenshots goes here | Screenshots goes here |
+<div align="center">
+
+<table>
+  <tr>
+    <td align="center">
+      <b>Splash Screen</b><br/>
+      <img src="./assets/screens/SplashScreen.jpg" width="150"/>
+    </td>
+    <td align="center">
+      <b>Home Guj</b><br/>
+      <img src="./assets/screens/HomeScreenGuj.jpg" width="150"/>
+    </td>
+    <td align="center">
+      <b>Records Guj</b><br/>
+      <img src="./assets/screens/RecordScreenGuj.jpg" width="150"/>
+    </td>
+    <td align="center">
+      <b>Settings Guj</b><br/>
+      <img src="./assets/screens/SettingsScreenGuj.jpg" width="150"/>
+    </td>
+  </tr>
+
+  <tr>
+    <td align="center">
+      <b>Add Prices Guj</b><br/>
+      <img src="./assets/screens/AddPriceScreenGuj.jpg" width="150"/>
+    </td>
+    <td align="center">
+      <b>Select Quantity Guj</b><br/>
+      <img src="./assets/screens/SelectQuantityGuj.jpg" width="150"/>
+    </td>
+    <td align="center">
+      <b>Monthly Records Guj</b><br/>
+      <img src="./assets/screens/MonthlyRecordGuj.jpg" width="150"/>
+    </td>
+    <td align="center">
+      <b>Home En</b><br/>
+      <img src="./assets/screens/HomeScreenEn.jpg" width="150"/>
+    </td>
+  </tr>
+
+  <tr>
+  <td align="center">
+      <b>Records En</b><br/>
+      <img src="./assets/screens/RecordScreenEn.jpg" width="150"/>
+    </td>
+    <td align="center">
+      <b>Settings En</b><br/>
+      <img src="./assets/screens/SettingsScreenEn.jpg" width="150"/>
+    </td>
+    <td align="center">
+      <b>Add Price En</b><br/>
+      <img src="./assets/screens/AddPriceScreenEn.jpg" width="150"/>
+    </td>
+    <td align="center">
+      <b>Seelct Quntity En</b><br/>
+      <img src="./assets/screens/SelectQuantityEn.jpg" width="150"/>
+    </td>
+  </tr>
+</table>
+
+</div>
 
 ---
 
